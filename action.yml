@@ -8,7 +8,7 @@ inputs:
     default: '4.5.5' # or master
   BUILD_LIST:
     description: 'The opencv modules(libraries, components) to be build, separated with `,` and no spaces'
-    required: true
+    required: false
     default: 'core,imgcodecs,imgproc'
 runs:
   using: "composite"
@@ -19,10 +19,14 @@ runs:
     
     # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-environment-variable
     - name: Set env
-      run: echo "opencv_tag=${{ inputs.opencv_tag }}" >> $GITHUB_ENV
+      run: |
+        echo "opencv_tag=${{ inputs.opencv_tag }}" >> $GITHUB_ENV
+        echo "BUILD_LIST=${{ inputs.BUILD_LIST }}" >> $GITHUB_ENV
       shell: bash
     - name: Test env
-      run: echo $opencv_tag
+      run: |
+        echo $opencv_tag
+        echo $BUILD_LIST
       shell: bash
 
     - name: Setup Ninja
