@@ -24,6 +24,11 @@ runs:
     - name: Setup Ninja
       uses: seanmiddleditch/gha-setup-ninja@v3
 
+    - name: Delete GAPI module
+      run: rm -rf modules/gapi
+      working-directory: opencv
+      shell: bash
+
     - name: configure opencv
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
