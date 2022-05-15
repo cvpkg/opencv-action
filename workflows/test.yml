@@ -1,0 +1,57 @@
+name: test
+
+on:
+  push
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    
+    strategy:
+      matrix:
+        os: [
+          #macOS-latest,
+          ubuntu-latest,
+          #windows-latest
+        ]
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install opencv
+        uses: ./
+        with:
+          opencv_tag: '4.5.5'
+
+      - name: List environment variables
+        run: env
+        if: runner.os != 'Windows'
+
+      - name: configure test
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            cmake -T v143,host=x64 -A x64 . -B build
+          else
+            cmake -DCMAKE_BUILD_TYPE=Release . -B build
+          fi
+        working-directory: test
+        shell: bash
+      - name: build test
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            cmake --build . --config Release
+          else
+            cmake --build .
+          fi
+        working-directory: test/build
+        shell: bash
+      - name: run test
+        run: |
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            ./Release/testbed.exe
+          else
+            ./testbed
+          fi
+        working-directory: test/build
+        shell: bash
