@@ -12,6 +12,7 @@ action.yml:
   with:
     opencv_tag: '4.5.5' # Default is '4.5.5'. An env var 'opencv_tag' will be defined.
     BUILD_LIST: 'core,imgcodecs,imgproc' # Default is 'core,imgcodecs,imgproc'. The opencv modules(libraries, components) to be build, separated with `,` and no spaces.
+    BUILD_SHARED_LIBS: 'OFF' # Default is 'OFF'. Build shared opencv librarires, should be "ON" or "OFF".
 ```
 
 ## Use in CMakeLists.txt
