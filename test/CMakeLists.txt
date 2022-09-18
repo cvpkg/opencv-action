@@ -4,6 +4,8 @@ project(use_opencv_example)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_CXX_STANDARD 11)
 
+set(OpenCV_STATIC ON) # This is required for Windows static build of OpenCV. If not set, will give hint "not compatible"
+
 if(DEFINED ENV{GITHUB_ACTIONS} AND DEFINED ENV{GITHUB_WORKSPACE})
   set(ARTIFACTS_DIR "$ENV{GITHUB_WORKSPACE}/artifacts")
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
@@ -17,9 +19,6 @@ if(DEFINED ENV{GITHUB_ACTIONS} AND DEFINED ENV{GITHUB_WORKSPACE})
   message(STATUS ">>> ENV{GITHUB_WORKSPACE} is: $ENV{GITHUB_WORKSPACE}")
   message(STATUS ">>> ARTIFACTS_DIR is: ${ARTIFACTS_DIR}")
   message(STATUS ">>> OpenCV_DIR is: ${OpenCV_DIR}")
-  if (CMAKE_SYSTEM_NAME MATCHES "Windows")
-    message(STATUS "!! MSVC_VERSION: ${MSVC_VERSION}")
-  endif()
   find_package(OpenCV REQUIRED)
 endif()
 
