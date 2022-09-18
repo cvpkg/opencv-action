@@ -10,9 +10,10 @@ action.yml:
 - name: Install opencv
   uses: cvpkg/opencv-action@v0.1
   with:
-    opencv_tag: '4.6.0' # Default is '4.6.0'. An env var 'opencv_tag' will be defined.
-    BUILD_LIST: 'core,imgcodecs,imgproc' # Default is 'core,imgcodecs,imgproc'. The opencv modules(libraries, components) to be build, separated with `,` and no spaces.
-    BUILD_SHARED_LIBS: 'OFF' # Default is 'OFF'. Build shared opencv librarires, should be "ON" or "OFF".
+    opencv_tag: '4.6.0' # Optional. Default is '4.6.0'. An env var 'opencv_tag' will be defined.
+    BUILD_LIST: 'core,imgcodecs,imgproc' # Optional. Default is 'core,imgcodecs,imgproc'. The opencv modules(libraries, components) to be build, separated with `,` and no spaces.
+    BUILD_SHARED_LIBS: 'OFF' # Optional. Default is 'OFF'. Build shared opencv librarires, should be "ON" or "OFF".
+    BUILD_WITH_STATIC_CRT: 'OFF' # Optional. Default is 'OFF'. Build with static C Runtime Library?(only when MSVC), should be "ON" or "OFF"
 ```
 
 ## Use in CMakeLists.txt
