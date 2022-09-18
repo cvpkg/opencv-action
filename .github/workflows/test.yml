@@ -22,7 +22,7 @@ jobs:
       - name: Install opencv
         uses: ./
         with:
-          opencv_tag: '4.5.5'
+          opencv_tag: '4.6.0'
 
       - name: List environment variables
         run: env
