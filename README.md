@@ -19,6 +19,8 @@ action.yml:
 ## Use in CMakeLists.txt
 To set the correct paths, you could add to your `CMakeLists.txt`:
 ```cmake
+set(OpenCV_STATIC ON) # This is required when on Windows using static build of OpenCV. If not set, will give hint "not compatible"
+
 if(DEFINED ENV{GITHUB_ACTIONS} AND DEFINED ENV{GITHUB_WORKSPACE})
   set(ARTIFACTS_DIR "$ENV{GITHUB_WORKSPACE}/artifacts")
   if(CMAKE_SYSTEM_NAME MATCHES "Windows")
